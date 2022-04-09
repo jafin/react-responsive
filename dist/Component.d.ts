@@ -1,7 +1,9 @@
-import * as React from 'react';
-import { MediaQueryAllQueryable, MediaQueryMatchers } from './types';
+import * as React from "react";
+import { MediaQueryAllQueryable, MediaQueryMatchers } from "./types";
+import { ReactNode } from "react";
 interface MediaQueryProps extends MediaQueryAllQueryable {
     component?: string | React.FC<any> | React.ClassType<any, any, any> | React.ComponentClass<any>;
+    children?: ReactNode | undefined | Function;
     query?: string;
     style?: React.CSSProperties;
     className?: string;

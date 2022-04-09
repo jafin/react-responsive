@@ -1,9 +1,15 @@
-import useMediaQuery from './useMediaQuery'
-import * as React from 'react'
-import { MediaQueryAllQueryable, MediaQueryMatchers } from './types'
+import useMediaQuery from "./useMediaQuery";
+import * as React from "react";
+import { MediaQueryAllQueryable, MediaQueryMatchers } from "./types";
+import { ReactNode } from "react";
 
 interface MediaQueryProps extends MediaQueryAllQueryable {
-  component?: string | React.FC<any> | React.ClassType<any, any, any> | React.ComponentClass<any>;
+  component?:
+    | string
+    | React.FC<any>
+    | React.ClassType<any, any, any>
+    | React.ComponentClass<any>;
+  children?: ReactNode | undefined | Function;
   query?: string;
   style?: React.CSSProperties;
   className?: string;
@@ -13,13 +19,18 @@ interface MediaQueryProps extends MediaQueryAllQueryable {
   onChange?: (_matches: boolean) => void;
 }
 
-const MediaQuery: React.FC<MediaQueryProps> = ({ children, device, onChange, ...settings }) => {
-  const matches = useMediaQuery(settings, device, onChange)
+const MediaQuery: React.FC<MediaQueryProps> = ({
+  children,
+  device,
+  onChange,
+  ...settings
+}) => {
+  const matches = useMediaQuery(settings, device, onChange);
 
-  if (typeof children === 'function') {
-    return children(matches)
+  if (typeof children === "function") {
+    return children(matches);
   }
-  return matches ? children : null
-}
+  return matches ? children : null;
+};
 
-export default MediaQuery
+export default MediaQuery;
