@@ -4,35 +4,23 @@ const webpack = require('webpack')
 const env = new webpack.EnvironmentPlugin({
   NODE_ENV: process.env.BUILD_MODE == 'umd-min' ? 'production' : 'development'
 })
-const uglify = new webpack.optimize.UglifyJsPlugin({
-  sourceMap: true,
-  parallel: true,
-  cache: true
-})
-const uglifyLite = new webpack.optimize.UglifyJsPlugin({
-  sourceMap: true,
-  cache: true,
-  parallel: true,
-  compress: {
-    dead_code: true,
-    unused: true
-  },
-  mangle: false,
-  output: {
-    beautify: true
-  }
-})
 
 const filename = process.env.BUILD_MODE === 'umd'
   ? 'react-responsive.js'
   : 'react-responsive.min.js'
-
-const plugins = process.env.BUILD_MODE === 'umd-min'
-  ? [ env, uglify ]
-  : [ env, uglifyLite ]
+  
+const plugins = [env];
+const optimization = process.env.BUILD_MODE === 'umd-min' 
+ ? {
+ } : 
+ {
+  //  mangleExports:false,
+   minimize: false,
+ }
 
 module.exports = {
   entry: './src/index.ts',
+  mode:'production',
   output: {
     path: path.join(__dirname, 'dist'),
     filename,
@@ -40,6 +28,7 @@ module.exports = {
     libraryTarget: 'umd',
     library: 'MediaQuery'
   },
+  optimization: optimization,
   devtool: 'source-map',
   externals: {
     react: {
