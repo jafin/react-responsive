@@ -6,12 +6,12 @@
     "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "Node",
-    "sourceMap": false,
+    "sourceMap": true,
     "strict": true,
     "rootDir": "./src",
     "declaration": true,
     "esModuleInterop": true,
-    "outDir": "./",
+    "outDir": "./ts-build",
     "paths": {
       "shallow-equal": ["./src/@types/shallow-equal"]
     }
